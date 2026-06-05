@@ -36,17 +36,19 @@ const AdminProfile = () => {
           },
         });
 
-        setAdmin(res.data);
+        console.log(res.data);
+
+        setAdmin(res.data.admin);
 
         setFormData({
-          name: res.data.name,
-          email: res.data.email,
+          name: res.data.admin.name,
+          email: res.data.admin.email,
           password: "",
         });
 
         setOriginalData({
-          name: res.data.name,
-          email: res.data.email,
+          name: res.data.admin.name,
+          email: res.data.admin.email,
         });
 
       } catch (error) {
@@ -110,21 +112,21 @@ const AdminProfile = () => {
       {/* HEADER */}
       <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-2xl p-6 shadow-md flex items-center gap-4">
         <div className="w-20 h-20 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-3xl font-bold">
-          {admin.name.charAt(0)}
+          {admin?.name?.charAt(0) || "A"}
         </div>
 
         <div>
           <h2 className="text-xl font-bold">
-            {admin.name}
+            {admin?.name || "Admin"}
           </h2>
 
           <p className="text-gray-500 flex items-center gap-2 text-sm">
-            <Mail size={14} /> {admin.email}
+            <Mail size={14} /> {admin?.email || "No Email"}
           </p>
 
           <p className="text-gray-500 flex items-center gap-2 text-sm">
             <Calendar size={14} />{" "}
-            {new Date(admin.createdAt).toDateString()}
+            {admin?.createdAt ? new Date(admin.createdAt).toDateString(): "No Date"}
           </p>
         </div>
       </div>
@@ -201,7 +203,7 @@ const AdminProfile = () => {
                   className="border px-2 py-1 rounded bg-white text-black dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 />
               ) : (
-                <span className="font-medium">{admin.name}</span>
+                <span className="font-medium">{admin?.name || "Admin"}</span>
               )}
             </div>
 
@@ -217,7 +219,7 @@ const AdminProfile = () => {
                   className="border px-2 py-1 rounded bg-white text-black dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 />
               ) : (
-                <span className="font-medium">{admin.email}</span>
+                <span className="font-medium">{admin?.email || "No Email"}</span>
               )}
             </div>
 
@@ -231,7 +233,7 @@ const AdminProfile = () => {
             <div className="flex justify-between">
               <span className="text-gray-500">Joined Date</span>
               <span className="font-medium">
-                {new Date(admin.createdAt).toDateString()}
+                {admin?.createdAt ? new Date(admin.createdAt).toDateString(): "No Date"}
               </span>
             </div>
 
