@@ -26,7 +26,7 @@ const AdminProfile = () => {
     email: "",
   });
 
-  // 🔥 Fetch Profile
+  //  Fetch Profile
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -61,18 +61,18 @@ const AdminProfile = () => {
     fetchProfile();
   }, []);
 
-  // 🔥 Input change
+  //  Input change
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 🔥 Detect changes
+  //  Detect changes
   const isChanged =
     formData.name !== originalData.name ||
     formData.email !== originalData.email ||
     formData.password !== "";
 
-  // 🔥 Save
+  //  Save
   const handleSave = async () => {
     try {
       await API.put("/admin/update-profile", formData, {
